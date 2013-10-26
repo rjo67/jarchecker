@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<antlib>
+   <typedef name="checker" classname="de.rjo.jarchecker.ant.CheckerTask"/>
+</antlib>
