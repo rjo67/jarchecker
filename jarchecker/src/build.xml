@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     14.10.2013 12:45:10                                                        
+
+     ant build file to illustrate & test usage of the jarchecker 'checker' task.                                                              
+     ====================================================================== -->
+<project name="project" xmlns:jc="antlib:de.rjo.jarchecker.ant" default="default">
+
+	<taskdef uri="jc:de.rjo.jarchecker" resource="de/rjo/jarchecker/ant/antlib.xml" />
+
+	<target name="default">
+		<jc:checker file="ant.jar" failonerror="false">
+			<jc:dirSize dir="org/apache/tools/ant/util/optional" nbr="5758" op="eq" />
+			<jc:nbrEntries dir="org/apache/tools/ant/util/optional" nbr="2" op="gt" />
+			<jc:entry name="123" path="org/apache/tools/a/antlib.xml" />
+			<jc:withDir name="org/apache/tools/ant/util/optional">
+				<jc:nbrEntries nbr="2" op="eq" />
+				<jc:dirSize nbr="5759" op="eq" />
+			</jc:withDir>
+			<jc:withDir name="org/apache/tools/ant">
+				<jc:entry name="antlib2.xml" />
+				<jc:entry name="antlib.xml" nbr="1234" op="eq"/>
+			</jc:withDir>
+			<jc:withDir name="org/apache/tools/ant/types/optional">
+				<jc:dirSize nbr="11000" op="gt" />
+			</jc:withDir>
+			<jc:withDir name="org/apache/tools/bzip2">
+				<jc:dirSize nbr="49000" op="lt" />
+			</jc:withDir>
+			<jc:withDir name="org/apache/tools/ant/taskdefs/optional/depend">
+				<jc:dirSize nbr="27000" nbr2="32000" op="between" />
+			</jc:withDir>
+		</jc:checker>
+	</target>
+
+</project>
